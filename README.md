@@ -1,1 +1,385 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apostolic Salvation Church</title>
+  <meta name="description" content="Apostolic Salvation Church — Agbogba-Ashumang Road. Sunday Service 9:00AM-12:00NOON. Wednesday & Friday Evening Services 6:30PM-8:30PM.">
+  <style>
+    /* ===== Reset & Global ===== */
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html,body { height:100%; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: #0f1724; /* deep navy */
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height: 1.5;
+    }
+
+    /* ===== Header ===== */
+    header {
+      background: linear-gradient(180deg,#0b1a2b 0%, #0f2437 100%);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(2,6,23,0.6);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 18px;
+    }
+
+    /* Logo block (SVG + text) */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .brand-title .name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffdf80; /* gold */
+      letter-spacing: 0.3px;
+    }
+    .brand-title .tag {
+      font-size: 12px;
+      color: #dbe9ff;
+      opacity: 0.9;
+    }
+
+    /* Navigation */
+    nav { margin-left: auto; }
+    nav ul {
+      display:flex;
+      gap: 10px;
+      list-style:none;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    nav a {
+      color: #dbe9ff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background .18s, color .18s, transform .12s;
+    }
+    nav a:hover { background: rgba(255,223,128,0.08); transform: translateY(-2px); color: #ffdf80; }
+    nav a.active { color: #ffdf80; text-decoration: underline; }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color: #fff;
+      padding: 60px 20px;
+      background:
+        linear-gradient(180deg, rgba(3,10,20,0.55), rgba(3,10,20,0.55)),
+        url('images/church-bg.jpg') center/cover no-repeat;
+      animation: heroFade .9s ease-out;
+    }
+    @keyframes heroFade { from { opacity:0; transform: translateY(8px) } to { opacity:1; transform: none } }
+    .hero-inner { max-width: 980px; margin:auto; }
+    .hero h2 { font-size: 34px; margin: 0 0 10px; color: #fffbf5; text-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+    .hero p { font-size: 16px; margin: 0 0 18px; color: #e7f3ff; opacity: 0.95; }
+    .btn {
+      background: linear-gradient(180deg,#ffdf80,#f8c25a);
+      color: #072033;
+      padding: 12px 22px;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight:800;
+      box-shadow: 0 8px 26px rgba(248,194,90,0.18);
+      display:inline-block;
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(248,194,90,0.22); }
+
+    /* ===== Container & Cards ===== */
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 18px; }
+    section.card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      padding: 34px;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: all 700ms cubic-bezier(.2,.9,.2,1);
+    }
+    section.card.visible { opacity: 1; transform: translateY(0); }
+    h2.section-title { color: #ffdf80; text-align:center; margin-top:0; font-size:26px; }
+
+    /* Services */
+    .service-list { list-style:none; padding:0; max-width:720px; margin: 12px auto 0; text-align:center; line-height:1.8; color:#e7f3ff; }
+    .service-item { display:flex; justify-content:center; gap:12px; align-items:center; margin:10px 0; }
+    .badge { background: rgba(255,223,128,0.12); color:#ffdf80; padding:8px 12px; border-radius:999px; font-weight:700; min-width:200px; text-align:center; }
+
+    /* Events */
+    .events-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:18px; max-width:900px; margin:14px auto 0; }
+    .event {
+      border-left: 4px solid rgba(255,223,128,0.9);
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      color: #e6eef8;
+    }
+    .event h3 { margin:0 0 6px; color:#ffdf80; font-size:18px; }
+
+    /* Gallery */
+    .gallery {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .gallery .photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #0b1220;
+      min-height: 160px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .gallery img {
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition: transform .35s ease;
+      filter: saturate(0.98) contrast(1.02);
+    }
+    .gallery .photo:hover img { transform: scale(1.06); }
+    .photo .caption {
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background: rgba(2,6,23,0.55);
+      color:#ffdf80;
+      padding:6px 8px;
+      border-radius:6px;
+      font-size:13px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Contact */
+    .contact p { text-align:center; line-height:1.6; margin:6px 0; color:#e7f3ff; }
+
+    /* Footer */
+    footer { background: linear-gradient(180deg,#071826,#0b2a3a); color:#dbe9ff; padding:18px 10px; text-align:center; font-size:14px; border-top:4px solid rgba(255,223,128,0.06); margin-top:18px; }
+
+    /* Logo svg sizing */
+    .logo-svg { width:68px; height:68px; display:block; }
+
+    /* Accessibility focus */
+    a:focus, button:focus { outline: 3px solid rgba(255,223,128,0.18); outline-offset: 3px; }
+
+    /* Responsive tweaks */
+    @media (max-width:880px) {
+      .header-inner { padding:12px 14px; gap:10px; }
+      nav { margin-left: 8px; }
+      .hero { padding: 70px 18px; min-height: 360px; }
+      .hero h2 { font-size:28px; }
+    }
+    @media (max-width:520px) {
+      .brand-title .name { font-size:15px; }
+      .logo-svg { width:56px; height:56px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner" role="banner">
+      <div class="logo-wrap" aria-hidden="false">
+        <!-- Inline SVG logo (cross + flame + church name) -->
+        <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" focusable="false">
+          <defs>
+            <linearGradient id="goldGrad" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#ffdf80"/>
+              <stop offset="1" stop-color="#f6b24c"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="10" fill="rgba(255,255,255,0.02)"/>
+          <g transform="translate(6,6) scale(0.9)">
+            <rect x="20" y="8" width="4" height="28" rx="1" fill="#0b2a3a"/>
+            <rect x="12" y="18" width="20" height="4" rx="1" fill="#0b2a3a"/>
+            <path d="M36 10c0 6-6 9-6 14 0 2.8 2 5 4 5s4-2.2 4-5c0-5-6-8-6-14 0-3 2.5-6 6-6-2 1.5 0 4 2 6z" fill="url(#goldGrad)"/>
+            <path d="M34 8c0 4-3 6-3 9 0 1.8 1.3 3 2.6 3s2.4-1.2 2.4-3c0-3-3-5-3-9 0-2 1.7-4 3-4-1 1 0 2 0 4z" fill="#ff9f3c" opacity=".95"/>
+          </g>
+        </svg>
+
+        <div class="brand-title">
+          <span class="name">Apostolic Salvation Church</span>
+          <span class="tag">Bringing Light, Love & Salvation</span>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Welcome to Apostolic Salvation Church">
+    <div class="hero-inner">
+      <h2>Welcome to Apostolic Salvation Church</h2>
+      <p>“Bringing Light, Love, and Salvation to All.” — Serving Agbogba–Ashumang Road community</p>
+      <a class="btn" href="#contact">Plan a Visit</a>
+    </div>
+  </section>
+
+  <main class="container" role="main">
+    <!-- About -->
+    <section id="about" class="card" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About Us</h2>
+      <p style="max-width:760px;margin:0 auto;text-align:center;color:#dbeefc;">
+        <strong>Mission:</strong> To spread the gospel of Jesus Christ, build strong faith, and serve our community with love and compassion.
+      </p>
+      <p style="max-width:760px;margin:12px auto 0;text-align:center;color:#dbeefc;">
+        <strong>Vision:</strong> Lives transformed by the power of God — nations reached with His saving grace.
+      </p>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="card" aria-labelledby="services-title">
+      <h2 id="services-title" class="section-title">Our Services</h2>
+
+      <div style="max-width:760px;margin:14px auto 0;">
+        <div class="service-item">
+          <div class="badge">Sunday Service</div>
+          <div style="color:#dbe9ff;font-weight:600;">9:00 AM — 12:00 NOON</div>
+        </div>
+
+        <div class="service-item">
+          <div class="badge">Wednesday Evening Service</div>
+          <div style="color:#dbe9ff;font-weight:600;">6:30 PM — 8:30 PM</div>
+        </div>
+
+        <div class="service-item">
+          <div class="badge">Friday Evening Service</div>
+          <div style="color:#dbe9ff;font-weight:600;">6:30 PM — 8:30 PM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section id="events" class="card" aria-labelledby="events-title">
+      <h2 id="events-title" class="section-title">Upcoming Events</h2>
+      <div class="events-grid" role="list">
+        <div class="event" role="listitem">
+          <h3>Annual Revival 2025</h3>
+          <p>March 10–17, 2025 — A week of revival, worship and transformation.</p>
+        </div>
+        <div class="event" role="listitem">
+          <h3>Youth Conference</h3>
+          <p>April 20–22, 2025 — Inspiring and equipping the next generation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery (Ghana-inspired worship photos) -->
+    <section id="gallery" class="card" aria-labelledby="gallery-title">
+      <h2 id="gallery-title" class="section-title">Inspiration — Worship Moments (Ghana)</h2>
+
+      <div class="gallery" role="list">
+        <figure class="photo" role="listitem">
+          <img src="images/worship1.jpg" alt="Worshippers raising hands in praise">
+          <figcaption class="caption">Praise & Worship</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="images/worship2.jpg" alt="Choir in traditional attire singing">
+          <figcaption class="caption">Choir & Song</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="images/worship3.jpg" alt="Pastor ministering to the congregation">
+          <figcaption class="caption">Ministry in Action</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="images/worship4.jpg" alt="Youth group worshiping together">
+          <figcaption class="caption">Youth Fellowship</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="images/worship5.jpg" alt="Community outreach and prayer">
+          <figcaption class="caption">Outreach & Care</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="images/worship6.jpg" alt="Congregation in joyful celebration">
+          <figcaption class="caption">Joyful Celebration</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="card contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact Us</h2>
+      <p><strong>Location:</strong> Agbogba–Ashumang Road, near the Total Filling Station</p>
+      <p><strong>Email:</strong> apostolicsalvation@gmail.com</p>
+      <p><strong>Phone:</strong> +233 53 656 9707</p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 Apostolic Salvation Church. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll for sections
+    const sections = document.querySelectorAll("section.card, .hero");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.18 });
+    sections.forEach(s => io.observe(s));
+
+    // Highlight nav links as you scroll
+    const navLinks = document.querySelectorAll("nav a");
+    const sectionMap = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
+    function onScroll() {
+      const top = window.scrollY + 140;
+      sectionMap.forEach((sec, idx) => {
+        if (!sec) return;
+        const start = sec.offsetTop;
+        const end = start + sec.offsetHeight;
+        navLinks[idx].classList.toggle('active', top >= start && top < end);
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+  </script>
+</body>
+</html>
